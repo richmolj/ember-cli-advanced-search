@@ -13,6 +13,8 @@ App = Ember.Application.extend({
   Resolver
 });
 
+App.LOG_TRANSITIONS = true;
+
 loadInitializers(App, config.modulePrefix);
 
 export default App;

@@ -1,0 +1,27 @@
+<form {{action 'query' on='submit'}}>
+  <label>String Search</label>
+  {{input type='text' value=model.conditions.name }}
+
+  <button type='submit' />
+</form>
+
+<br />
+<h2>Results</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>id</th>
+      <th>name</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    {{#each model.results as |result|}}
+      <tr>
+        <td>{{result.id}}</td>
+        <td>{{result.name}}</td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
