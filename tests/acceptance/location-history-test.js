@@ -2,25 +2,43 @@ import { test } from 'qunit';
 import moduleForAcceptance from '../../tests/helpers/module-for-acceptance';
 import page from '../pages/people-search';
 
-moduleForAcceptance('Acceptance | location history');
+moduleForAcceptance('Acceptance | location history', {
+  beforeEach() {
+    server.create('person', {name: 'Marge'});
+    server.create('person', {name: 'Bart'});
+    server.create('person', {name: 'Homer'});
+    server.create('person', {name: 'Lisa'});
+  }
+});
 
-test('initialize with defaults from the )erver', function(assert) {
+test('initialize with defaults from the server', function(assert) {
   page.visit();
 
   andThen(function() {
     assert.equal(currentURL(), '/');
 
-    assert.equal(page.nameValue(), 'Marge');
+    assert.equal(page.nameValue(), 'Marge', "message");
     assert.equal(page.results().count(), 1);
     assert.equal(page.results(1).name(), 'Marge');
   });
 });
 
 test('basic text query', function(assert) {
+
   page.visit().name('Bart').submit();
 
   andThen(function() {
-    assertEncodedParams('search', { conditions: { name: 'Bart' } });
+    assertEncodedParams('search', {
+      conditions: {
+        name: 'Bart'
+      },
+      metadata: {
+        pagination: {
+          currentPage: 1,
+          perPage: 3
+        }
+      }
+    });
     assert.equal(page.nameValue(), 'Bart');
     assert.equal(page.results().count(), 1);
     assert.equal(page.results(1).name(), 'Bart');
@@ -39,7 +57,7 @@ test('basic text query', function(assert) {
 });
 
 test('loading from a url with an encoded search param', function(assert) {
-  let searchObj = { conditions: { name: 'Bart' } };
+  let searchObj = { conditions: { name: 'Bart' }, metadata: { pagination: { currentPage: 1, perPage: 3 } } };
   let encoded = btoa(JSON.stringify(searchObj));
   page.visit({}, { search: encoded });
 
@@ -51,7 +69,7 @@ test('loading from a url with an encoded search param', function(assert) {
 });
 
 test('resetting a search that has been loaded from URL state', function(assert) {
-  let searchObj = { conditions: { name: 'Bart' } };
+  let searchObj = { conditions: { name: 'Bart' }, metadata: {currentPage: 1, perPage: 3} };
   let encoded = btoa(JSON.stringify(searchObj));
   page.visit({}, { search: encoded });
 

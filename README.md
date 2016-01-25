@@ -1,17 +1,37 @@
 # Bb-advanced-search
 
-This README outlines the details of collaborating on this Ember addon.
-
 ## Installation
-
-* `git clone` this repository
-* `npm install`
-* `bower install`
 
 ## Running
 
-* `ember server`
-* Visit your app at http://localhost:4200.
+## Snake-cased server API
+
+Because this addon uses [ember-data-model-fragments](https://github.com/lytics/ember-data-model-fragments), if the server is returning snake-cased attributes - like
+search.metadata.current_page instead of search.metadata.currentPage -
+you must register a custom serializer for ember-data-model-fragments if
+you haven't already:
+
+```es6
+// https://github.com/lytics/ember-data-model-fragments/issues/166
+// app/initializers/fragment-serializer
+
+import DS from 'ember-data';
+
+const FragmentSerializer = DS.JSONSerializer.extend({
+  keyForAttribute(key) {
+    return Ember.String.underscore(key);
+  }
+});
+
+export default {
+  name: 'FragmentSerializer',
+  before: 'store',
+  after: 'fragmentTransform',
+  initialize: function(container) {
+    container.register('serializer:-fragment', FragmentSerializer);
+  }
+};
+```
 
 ## Running Tests
 

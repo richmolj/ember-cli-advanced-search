@@ -1,11 +1,6 @@
-export default function(/* server */) {
-
-  /*
-    Seed your development database using your factories.
-    This data will not be loaded in your tests.
-
-    Make sure to define a factory for each model you want to create.
-  */
-
-  // server.createList('post', 10);
+export default function(server) {
+  server.create('person', {name: 'Marge'});
+  server.create('person', {name: 'Bart'});
+  server.create('person', {name: 'Homer'});
+  server.create('person', {name: 'Lisa'});
 }

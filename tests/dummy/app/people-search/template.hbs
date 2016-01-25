@@ -11,6 +11,17 @@
 <br />
 <h2>Results</h2>
 
+total pages:
+<div id='total_pages'>{{model.totalPages}}</div>
+
+current page:
+<div id='current_page'>{{model.pagination.currentPage}}</div>
+
+per page:
+<div id='per_page'>{{model.pagination.perPage}}</div>
+
+pagination link:
+<a id='page_two' href='' {{action 'paginate' 2}}>Page 2</a>
 
 <table class='results'>
   <thead>

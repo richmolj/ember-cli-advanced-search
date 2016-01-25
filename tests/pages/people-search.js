@@ -16,6 +16,11 @@ export default PageObject.create({
   submit:    clickable('#search_submit'),
   reset:     clickable('#reset'),
 
+  perPage: text('#per_page'),
+  totalPages: text('#total_pages'),
+  currentPage: text('#current_page'),
+  pageTwo: clickable('#page_two'),
+
   results: collection({
     itemScope: '.results .result',
 
