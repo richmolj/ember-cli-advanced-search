@@ -1,14 +1,18 @@
+<h1>People Search</h1>
+
 <form {{action 'query' on='submit'}}>
   <label>String Search</label>
-  {{input type='text' value=model.conditions.name }}
+  {{input id='search_name' type='text' value=model.conditions.name }}
 
-  <button type='submit' />
+  <a href='' id='reset' {{action 'reset'}}>Reset</a>
+  <button id='search_submit' type='submit'>Submit</button>
 </form>
 
 <br />
 <h2>Results</h2>
 
-<table>
+
+<table class='results'>
   <thead>
     <tr>
       <th>id</th>
@@ -18,9 +22,9 @@
 
   <tbody>
     {{#each model.results as |result|}}
-      <tr>
+      <tr class='result'>
         <td>{{result.id}}</td>
-        <td>{{result.name}}</td>
+        <td class='name'>{{result.name}}</td>
       </tr>
     {{/each}}
   </tbody>

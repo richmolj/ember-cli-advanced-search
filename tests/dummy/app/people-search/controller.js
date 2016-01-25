@@ -1,15 +1,5 @@
 import Ember from 'ember';
+import AdvancedSearchable from 'bb-advanced-search/mixins/advanced-searchable';
 
-export default Ember.Controller.extend({
-  queryParams: ['search'],
-  search: null,
-
-  //# params...
-  actions: {
-    query() {
-      let model = this.get('model');
-      this.set('search', model.get('queryParams'));
-    }
-  }
-
+export default Ember.Controller.extend(AdvancedSearchable, {
 });
