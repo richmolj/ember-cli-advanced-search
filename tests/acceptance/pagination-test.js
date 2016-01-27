@@ -4,7 +4,7 @@ import page from '../pages/people-search';
 
 moduleForAcceptance('Acceptance | pagination', {
   beforeEach() {
-    server.createList('person', 10, {name: 'Marge'});
+    server.createList('person', 10, { name: 'Marge' });
   }
 });
 

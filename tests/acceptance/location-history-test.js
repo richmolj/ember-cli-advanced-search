@@ -4,10 +4,10 @@ import page from '../pages/people-search';
 
 moduleForAcceptance('Acceptance | location history', {
   beforeEach() {
-    server.create('person', {name: 'Marge'});
-    server.create('person', {name: 'Bart'});
-    server.create('person', {name: 'Homer'});
-    server.create('person', {name: 'Lisa'});
+    server.create('person', { name: 'Marge' });
+    server.create('person', { name: 'Bart' });
+    server.create('person', { name: 'Homer' });
+    server.create('person', { name: 'Lisa' });
   }
 });
 
@@ -17,7 +17,7 @@ test('initialize with defaults from the server', function(assert) {
   andThen(function() {
     assert.equal(currentURL(), '/');
 
-    assert.equal(page.nameValue(), 'Marge', "message");
+    assert.equal(page.nameValue(), 'Marge', 'message');
     assert.equal(page.results().count(), 1);
     assert.equal(page.results(1).name(), 'Marge');
   });
@@ -69,7 +69,7 @@ test('loading from a url with an encoded search param', function(assert) {
 });
 
 test('resetting a search that has been loaded from URL state', function(assert) {
-  let searchObj = { conditions: { name: 'Bart' }, metadata: {currentPage: 1, perPage: 3} };
+  let searchObj = { conditions: { name: 'Bart' }, metadata: { currentPage: 1, perPage: 3 } };
   let encoded = btoa(JSON.stringify(searchObj));
   page.visit({}, { search: encoded });
 
