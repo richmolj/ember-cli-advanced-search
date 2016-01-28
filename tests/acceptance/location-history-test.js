@@ -36,7 +36,8 @@ test('basic text query', function(assert) {
         pagination: {
           currentPage: 1,
           perPage: 3
-        }
+        },
+        sort: []
       }
     });
     assert.equal(page.nameValue(), 'Bart');

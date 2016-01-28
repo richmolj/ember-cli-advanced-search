@@ -50,6 +50,9 @@ export default function() {
       let offset = ((metadata.pagination.current_page - 1) * metadata.pagination.per_page);
       search.results = search.results.toArray()
         .slice(offset, metadata.pagination.per_page + offset);
+
+      let sorts = metadata.sort || [];
+      search.metadata.sort = sorts;
     }
 
     search.results = search.results.filter((r) => {

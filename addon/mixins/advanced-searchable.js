@@ -15,6 +15,12 @@ export default Ember.Mixin.create({
       this.send('query');
     },
 
+    sort(attribute, direction) {
+      let sort = { att: attribute, dir: direction };
+      this.set('model.metadata.sort', [sort]);
+      this.send('query');
+    },
+
     reset() {
       this.set('search', null);
     }

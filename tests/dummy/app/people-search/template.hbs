@@ -23,11 +23,19 @@ per page:
 pagination link:
 <a id='page_two' href='' {{action 'paginate' 2}}>Page 2</a>
 
+<br />
+sorts:
+{{#each model.metadata.sort as |sort|}}
+  att: {{sort.att}} dir: {{sort.dir}}
+{{/each}}
+
 <table class='results'>
   <thead>
     <tr>
-      <th>id</th>
-      <th>name</th>
+      {{#sortable-search-links model (action 'sort') as |links|}}
+        <th>id</th>
+        <th>{{links.link 'name' label='Name' onSortClass='bounce'}}</th>
+      {{/sortable-search-links}}
     </tr>
   </thead>
 

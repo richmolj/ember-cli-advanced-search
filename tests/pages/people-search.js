@@ -6,7 +6,8 @@ let {
   value,
   text,
   collection,
-  clickable
+  clickable,
+  hasClass
 } = PageObject;
 
 export default PageObject.create({
@@ -20,6 +21,10 @@ export default PageObject.create({
   totalPages: text('#total_pages'),
   currentPage: text('#current_page'),
   pageTwo: clickable('#page_two'),
+
+  sortName: clickable('th:nth-child(2) a'),
+  nameHasSortAscClass: hasClass('asc', 'th:nth-child(2) a'),
+  nameHasSortDescClass: hasClass('asc', 'th:nth-child(2) a'),
 
   results: collection({
     itemScope: '.results .result',

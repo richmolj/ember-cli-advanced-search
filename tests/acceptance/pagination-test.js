@@ -36,7 +36,8 @@ test('clicking a pagination link', function(assert) {
         pagination: {
           currentPage: 2,
           perPage: 3
-        }
+        },
+        sort: []
       }
     });
   });

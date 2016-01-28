@@ -13,7 +13,8 @@ export default DS.Model.extend(SearchPaginatable, {
         pagination: {
           currentPage: this.get('metadata.pagination.currentPage'),
           perPage: this.get('metadata.pagination.perPage')
-        }
+        },
+        sort: this.get('metadata.sort').serialize()
       }
     };
     let encoded =  btoa(JSON.stringify(serialized));
