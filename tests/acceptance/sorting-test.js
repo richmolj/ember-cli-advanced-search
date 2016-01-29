@@ -14,6 +14,12 @@ const assertSort = function(expectedSort) {
     conditions: {
       name: 'Marge'
     },
+    aggregations: [
+      {
+        name: 'name',
+        buckets: []
+      }
+    ],
     metadata: {
       pagination: {
         currentPage: 1,

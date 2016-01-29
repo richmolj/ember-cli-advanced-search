@@ -7,7 +7,7 @@ export default Ember.Mixin.create({
   actions: {
     query() {
       let model = this.get('model');
-      this.set('search', model.get('queryParams'));
+      this.set('search', model.toQueryParams());
     },
 
     paginate(page) {

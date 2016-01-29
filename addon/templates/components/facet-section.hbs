@@ -1,0 +1,34 @@
+<!-- if/elses here because checkbox helper not binding to checked properly -->
+
+<div class='facet'>
+  <div class='facet-header'>{{facet.label}}</div>
+
+  <label>All</label>
+
+  <span {{action 'allBucketDidChange' facet}}>
+    {{#if facet.hasSelection}}
+      {{input class='all-bucket' type='checkbox' checked=false}}
+    {{else}}
+      {{input class='all-bucket' type='checkbox' checked=true}}
+    {{/if}}
+  </span>
+
+  <div class='buckets'>
+    {{#each facet.buckets as |bucket|}}
+      <span class='bucket'>
+        <span {{action 'facetDidChange' facet bucket}}>
+          {{#if bucket.selected}}
+            {{input id=bucket.key type='checkbox' checked=true}}
+          {{else}}
+            {{input id=bucket.key type='checkbox' checked=false}}
+          {{/if}}
+        </span>
+
+        <label for="{{bucket.key}}">
+          <span class='bucket-label'>{{bucket.key}}</span>
+          <span class="facet-count">{{bucket.count}}</span>
+        </label>
+      </span>
+    {{/each}}
+  </div>
+</div>

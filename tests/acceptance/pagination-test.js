@@ -23,15 +23,21 @@ test('clicking a pagination link', function(assert) {
   page.visit().pageTwo();
 
   andThen(function() {
-    assert.equal(page.totalPages(), 4);
-    assert.equal(page.perPage(), 3);
-    assert.equal(page.currentPage(), 2);
-    assert.equal(page.results().count(), 3);
+    assert.equal(page.totalPages(), 4, "should have correct total pages");
+    assert.equal(page.perPage(), 3, "should have correct per_page");
+    assert.equal(page.currentPage(), 2, "should have correct current page");
+    assert.equal(page.results().count(), 3, "should return correct number of results");
 
     assertEncodedParams('search', {
       conditions: {
         name: 'Marge'
       },
+      aggregations: [
+        {
+          name: 'name',
+          buckets: []
+        }
+      ],
       metadata: {
         pagination: {
           currentPage: 2,

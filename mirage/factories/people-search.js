@@ -2,5 +2,6 @@ import { Factory } from 'ember-cli-mirage';
 
 export default Factory.extend({
   conditions: {},
-  metadata: {}
+  metadata: {},
+  aggregations: []
 });

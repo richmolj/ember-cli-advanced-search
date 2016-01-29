@@ -35,12 +35,13 @@ export default Ember.Mixin.create({
     return search;
   },
 
+  // We want to resolve both the template and the query
+  // before we have a final resolved model.
   query(searchParams) {
     let search = this.freshSearch(searchParams);
-    search.then((s) => {
-      s.save();
+    return search.then((s) => {
+      return s.save();
     });
-    return search;
   },
 
   resetModelViaQueryParams(searchParams) {

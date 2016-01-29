@@ -14,6 +14,9 @@
 total pages:
 <div id='total_pages'>{{model.totalPages}}</div>
 
+total results:
+<div id='total_results'>{{model.totalResultCount}}</div>
+
 current page:
 <div id='current_page'>{{model.pagination.currentPage}}</div>
 
@@ -28,6 +31,16 @@ sorts:
 {{#each model.metadata.sort as |sort|}}
   att: {{sort.att}} dir: {{sort.dir}}
 {{/each}}
+
+<br />
+<h4>Facets</h4>
+facet len {{model.aggregations.length}}
+{{#facet-sections model.aggregations onFacetChange=(action 'query')}}
+
+{{/facet-sections}}
+<br />
+<br />
+<br />
 
 <table class='results'>
   <thead>

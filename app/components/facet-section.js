@@ -1,0 +1,1 @@
+export { default } from 'bb-advanced-search/components/facet-section';

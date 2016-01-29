@@ -11,6 +11,14 @@ moduleForAcceptance('Acceptance | location history', {
   }
 });
 
+const searchObj = function() {
+  return {
+    conditions: { name: 'Bart' },
+    aggregations: [],
+    metadata: { pagination: { currentPage: 1, perPage: 3 } }
+  };
+};
+
 test('initialize with defaults from the server', function(assert) {
   page.visit();
 
@@ -24,7 +32,6 @@ test('initialize with defaults from the server', function(assert) {
 });
 
 test('basic text query', function(assert) {
-
   page.visit().name('Bart').submit();
 
   andThen(function() {
@@ -32,6 +39,12 @@ test('basic text query', function(assert) {
       conditions: {
         name: 'Bart'
       },
+      aggregations: [
+        {
+          name: 'name',
+          buckets: []
+        }
+      ],
       metadata: {
         pagination: {
           currentPage: 1,
@@ -58,8 +71,7 @@ test('basic text query', function(assert) {
 });
 
 test('loading from a url with an encoded search param', function(assert) {
-  let searchObj = { conditions: { name: 'Bart' }, metadata: { pagination: { currentPage: 1, perPage: 3 } } };
-  let encoded = btoa(JSON.stringify(searchObj));
+  let encoded = btoa(JSON.stringify(searchObj()));
   page.visit({}, { search: encoded });
 
   andThen(function() {
@@ -70,8 +82,7 @@ test('loading from a url with an encoded search param', function(assert) {
 });
 
 test('resetting a search that has been loaded from URL state', function(assert) {
-  let searchObj = { conditions: { name: 'Bart' }, metadata: { currentPage: 1, perPage: 3 } };
-  let encoded = btoa(JSON.stringify(searchObj));
+  let encoded = btoa(JSON.stringify(searchObj()));
   page.visit({}, { search: encoded });
 
   andThen(function() {
