@@ -56,8 +56,8 @@ test('clicking a facet', function(assert) {
       ],
       metadata: {
         pagination: {
-          currentPage: 1,
-          perPage: server.perPage
+          current_page: 1,
+          per_page: server.perPage
         },
         sort: []
       }
@@ -74,7 +74,7 @@ test('clicking "all" when a facet is selected', function(assert) {
     page.facetSections(1).clickAll();
 
     andThen(function() {
-    assert.equal(page.totalResults(), 9, 'should reset total results');
+      assert.equal(page.totalResults(), 9, 'should reset total results');
       assert.equal(page.facetSections(1).buckets(1).isChecked(), false, 'should uncheck the selected bucket');
     });
   });

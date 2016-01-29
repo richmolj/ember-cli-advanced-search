@@ -98,16 +98,18 @@ const initSearch = function(schema, id, payload) {
   let search = schema.peopleSearch.find(id);
 
   if (!search) {
-    search = schema.create('peopleSearch', {
-      id: id,
-      conditions: payload.conditions,
-      aggregations: [],
-      metadata: {pagination: {
-        current_page: 1,
-        total: 4,
-        per_page: perPage()
-      }}
-    });
+    search = schema.create('peopleSearch', { id: id });
+  }
+
+  search.conditions = payload.conditions;
+  search.aggregations = []
+  search.metadata = {
+    pagination: {
+      current_page: 1,
+      total: 4,
+      per_page: perPage()
+    },
+    sort: []
   }
 
   return search;

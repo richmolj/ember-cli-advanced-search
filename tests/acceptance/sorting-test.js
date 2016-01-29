@@ -22,8 +22,8 @@ const assertSort = function(expectedSort) {
     ],
     metadata: {
       pagination: {
-        currentPage: 1,
-        perPage: 3
+        current_page: 1,
+        per_page: 3
       },
       sort: expectedSort
     }

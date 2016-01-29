@@ -25,6 +25,7 @@
     "currentRouteName",
     "assertEncodedParams",
     "btoa",
+    "deepEqual",
     "ok"
   ],
   "node": false,

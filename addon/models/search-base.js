@@ -9,13 +9,11 @@ export default DS.Model.extend(SearchPaginatable, {
 
   toQueryParams() {
     let serialized = {
+      id: this.get('id'),
       conditions: this._serializeConditions(),
       aggregations: this.get('aggregations').serialize(),
       metadata: {
-        pagination: {
-          currentPage: this.get('metadata.pagination.currentPage'),
-          perPage: this.get('metadata.pagination.perPage')
-        },
+        pagination: this.get('metadata.pagination').serialize(),
         sort: this.get('metadata.sort').serialize()
       }
     };
@@ -27,16 +25,19 @@ export default DS.Model.extend(SearchPaginatable, {
     return new Ember.RSVP.Promise((resolve) => {
       if (encoded) {
         let decoded = JSON.parse(atob(encoded));
-
-        this.set('metadata', decoded.metadata);
-        this.set('aggregations', decoded.aggregations);
-
-        for (let key in decoded.conditions) {
-          this.set(`conditions.${key}`, decoded.conditions[key]);
-        }
-        resolve(this);
+        resolve(this._pushRecord(decoded));
       }
     });
+  },
+
+  _pushRecord(payload) {
+    this.store.pushPayload({ data: {
+      type: this.constructor.modelName,
+      id: payload.id,
+      attributes: payload
+    } });
+    let pushed = this.store.peekRecord(this.constructor.modelName, payload.id);
+    return pushed;
   },
 
   // Avoid forcing the app to create a serializer

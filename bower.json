@@ -15,6 +15,7 @@
     "ember-data-model-fragments": "2.1.1",
     "pretender": "~0.10.1",
     "lodash": "~3.7.0",
-    "Faker": "~3.0.0"
+    "Faker": "~3.0.0",
+    "babel-polyfill": ">= 0"
   }
 }

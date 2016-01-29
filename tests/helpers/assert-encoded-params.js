@@ -2,13 +2,12 @@ import Ember from 'ember';
 
 export default Ember.Test.registerHelper('assertEncodedParams', function(app, paramName, searchObject) {
   let url = currentURL();
-  let encoded =  btoa(JSON.stringify(searchObject));
-  encoded = encoded.replace(/=/g, '%3D'); // url encoding
 
-  // for debugging
-  // let decoded = url.split(`${paramName}=`)[1].split('%3D')[0]
-  // decoded = JSON.parse(window.atob(decoded));
-  // console.log('decoded', decoded);
+  let decoded = url.split(`${paramName}=`)[1].split('%3D');
+  decoded = JSON.parse(window.atob(decoded[0]));
 
-  ok(url.indexOf(`${paramName}=${encoded}`) > -1, `url should include encoded ${JSON.stringify(searchObject)}`);
+  deepEqual(decoded.conditions, searchObject.conditions, 'should have correct conditions encoded in URL');
+  deepEqual(decoded.aggregations, searchObject.aggregations, 'should have correct aggregations encoded in URL');
+  deepEqual(decoded.metadata.pagination, searchObject.metadata.pagination, 'should have correct pagination encoded in URL');
+  deepEqual(decoded.metadata.sort, searchObject.metadata.sort, 'should have correct sort encoded in URL');
 });

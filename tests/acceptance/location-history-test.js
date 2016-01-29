@@ -13,9 +13,10 @@ moduleForAcceptance('Acceptance | location history', {
 
 const searchObj = function() {
   return {
+    id: new Date().getTime(),
     conditions: { name: 'Bart' },
     aggregations: [],
-    metadata: { pagination: { currentPage: 1, perPage: 3 } }
+    metadata: { pagination: { current_page: 1, per_page: 3 } }
   };
 };
 
@@ -47,8 +48,8 @@ test('basic text query', function(assert) {
       ],
       metadata: {
         pagination: {
-          currentPage: 1,
-          perPage: 3
+          current_page: 1,
+          per_page: 3
         },
         sort: []
       }

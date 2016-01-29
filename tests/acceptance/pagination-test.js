@@ -23,10 +23,10 @@ test('clicking a pagination link', function(assert) {
   page.visit().pageTwo();
 
   andThen(function() {
-    assert.equal(page.totalPages(), 4, "should have correct total pages");
-    assert.equal(page.perPage(), 3, "should have correct per_page");
-    assert.equal(page.currentPage(), 2, "should have correct current page");
-    assert.equal(page.results().count(), 3, "should return correct number of results");
+    assert.equal(page.totalPages(), 4, 'should have correct total pages');
+    assert.equal(page.perPage(), 3, 'should have correct per_page');
+    assert.equal(page.currentPage(), 2, 'should have correct current page');
+    assert.equal(page.results().count(), 3, 'should return correct number of results');
 
     assertEncodedParams('search', {
       conditions: {
@@ -40,8 +40,8 @@ test('clicking a pagination link', function(assert) {
       ],
       metadata: {
         pagination: {
-          currentPage: 2,
-          perPage: 3
+          current_page: 2,
+          per_page: 3
         },
         sort: []
       }
