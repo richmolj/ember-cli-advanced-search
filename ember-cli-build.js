@@ -9,6 +9,7 @@ module.exports = function(defaults) {
   // Use es6 in tests
   // https://github.com/babel/ember-cli-babel/issues/40
   app.import('bower_components/babel-polyfill/browser-polyfill.js', { prepend: true });
+  app.import('bower_components/material-design-lite/material.css', { prepend: true });
 
   /*
     This build file specifes the options for the dummy test app of this

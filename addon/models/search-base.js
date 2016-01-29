@@ -11,7 +11,6 @@ export default DS.Model.extend(SearchPaginatable, {
     let serialized = this.serialize().data.attributes;
     serialized.id = this.get('id');
     serialized.conditions = this._serializeConditions(serialized.conditions);
-    console.log('serialized', serialized);
     let encoded =  btoa(JSON.stringify(serialized));
     return encoded;
   },

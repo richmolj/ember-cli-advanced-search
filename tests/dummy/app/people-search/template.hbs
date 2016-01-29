@@ -1,63 +1,66 @@
-<h1>People Search</h1>
+<h3>People Search</h3>
 
-<form {{action 'query' on='submit'}}>
-  <label>String Search</label>
-  {{input id='search_name' type='text' value=model.conditions.name }}
+<div class="mdl-grid">
+  <div class="mdl-cell mdl-cell--4-col">
+    <h5>Query:</h5>
+    <form {{action 'query' on='submit'}}>
+      <label>String Search</label>
+      {{input id='search_name' type='text' value=model.conditions.name }}
 
-  <a href='' id='reset' {{action 'reset'}}>Reset</a>
-  <button id='search_submit' type='submit'>Submit</button>
-</form>
+      <div>
+        <a href='' id='reset' {{action 'reset'}}>Reset</a>
+      </div>
+      <div>
+        <button id='search_submit' type='submit'>Submit</button>
+      </div>
+    </form>
+
+    <h4>Facets</h4>
+    {{facet-sections model.aggregations onFacetChange=(action 'query')}}
+  </div>
+
+  <div class="mdl-cell mdl-cell--6-col">
+    <h5>Results</h5>
+
+    total pages:
+    <span id='total_pages'>{{model.totalPages}}</span>
+
+    total results:
+    <span id='total_results'>{{model.totalResultCount}}</span>
+
+    current page:
+    <span id='current_page'>{{model.pagination.currentPage}}</span>
+
+    per page:
+    <span id='per_page'>{{model.pagination.perPage}}</span>
+
+    pagination link:
+    <a id='page_two' href='' {{action 'paginate' 2}}>Page 2</a>
+
+    <table class='results'>
+      <thead>
+        <tr>
+          {{#sortable-search-links model (action 'sort') as |links|}}
+            <th>id</th>
+            <th>{{links.link 'name' label='Name' onSortClass='bounce'}}</th>
+          {{/sortable-search-links}}
+        </tr>
+      </thead>
+
+      <tbody>
+        {{#each model.results as |result|}}
+          <tr class='result'>
+            <td>{{result.id}}</td>
+            <td class='name'>{{result.name}}</td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+</div>
+
 
 <br />
-<h2>Results</h2>
 
-total pages:
-<div id='total_pages'>{{model.totalPages}}</div>
 
-total results:
-<div id='total_results'>{{model.totalResultCount}}</div>
 
-current page:
-<div id='current_page'>{{model.pagination.currentPage}}</div>
-
-per page:
-<div id='per_page'>{{model.pagination.perPage}}</div>
-
-pagination link:
-<a id='page_two' href='' {{action 'paginate' 2}}>Page 2</a>
-
-<br />
-sorts:
-{{#each model.metadata.sort as |sort|}}
-  att: {{sort.att}} dir: {{sort.dir}}
-{{/each}}
-
-<br />
-<h4>Facets</h4>
-facet len {{model.aggregations.length}}
-{{#facet-sections model.aggregations onFacetChange=(action 'query')}}
-
-{{/facet-sections}}
-<br />
-<br />
-<br />
-
-<table class='results'>
-  <thead>
-    <tr>
-      {{#sortable-search-links model (action 'sort') as |links|}}
-        <th>id</th>
-        <th>{{links.link 'name' label='Name' onSortClass='bounce'}}</th>
-      {{/sortable-search-links}}
-    </tr>
-  </thead>
-
-  <tbody>
-    {{#each model.results as |result|}}
-      <tr class='result'>
-        <td>{{result.id}}</td>
-        <td class='name'>{{result.name}}</td>
-      </tr>
-    {{/each}}
-  </tbody>
-</table>
