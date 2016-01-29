@@ -8,15 +8,10 @@ export default DS.Model.extend(SearchPaginatable, {
   metadata: MF.fragment('search-base/metadata', { defaultValue: { pagination: {} } }),
 
   toQueryParams() {
-    let serialized = {
-      id: this.get('id'),
-      conditions: this._serializeConditions(),
-      aggregations: this.get('aggregations').serialize(),
-      metadata: {
-        pagination: this.get('metadata.pagination').serialize(),
-        sort: this.get('metadata.sort').serialize()
-      }
-    };
+    let serialized = this.serialize().data.attributes;
+    serialized.id = this.get('id');
+    serialized.conditions = this._serializeConditions(serialized.conditions);
+    console.log('serialized', serialized);
     let encoded =  btoa(JSON.stringify(serialized));
     return encoded;
   },
@@ -41,8 +36,8 @@ export default DS.Model.extend(SearchPaginatable, {
   },
 
   // Avoid forcing the app to create a serializer
-  _serializeConditions() {
-    let serializedConditions = this.get('conditions').serialize();
+  _serializeConditions(conditions) {
+    let serializedConditions = conditions;
     for (let key in serializedConditions) {
       if (!serializedConditions[key]) {
         delete(serializedConditions[key]);
