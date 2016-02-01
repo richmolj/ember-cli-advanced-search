@@ -76,16 +76,18 @@ test('loading indicator', function(assert) {
 
   andThen(function() {
     assert.notOk(page.isLoading());
+    server.timing = 100;
     page.name('Bart').submit();
 
     let done = assert.async();
     setTimeout(() => {
       assert.ok(page.isLoading());
       done();
-    }, 50);
+    }, 80);
 
     andThen(function() {
       assert.notOk(page.isLoading());
+      server.timing = 0;
     });
   });
 
