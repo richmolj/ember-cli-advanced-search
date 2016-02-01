@@ -6,6 +6,7 @@
     <form {{action 'query' on='submit'}}>
       <label>String Search</label>
       {{input id='search_name' type='text' value=model.conditions.name }}
+      {{input id='search_description' type='text' value=model.conditions.description }}
 
       <div>
         <a href='' id='reset' {{action 'reset'}}>Reset</a>

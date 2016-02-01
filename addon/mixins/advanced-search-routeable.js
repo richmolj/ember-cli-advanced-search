@@ -1,10 +1,11 @@
 import Ember from 'ember';
 
 export default Ember.Mixin.create({
+  searchModel: '', // ember data model name
 
   reloadBlankSearch() {
     // for whatever reason peekRecord and reload: true not working
-    let existing = this.store.peekAll('people-search').content.findBy('id', 'new');
+    let existing = this.store.peekAll(this.searchModel).content.findBy('id', 'new');
     if (existing) {
       this.store.unloadRecord(existing);
     }
@@ -12,13 +13,13 @@ export default Ember.Mixin.create({
   },
 
   fetchBlankSearch() {
-    return this.store.findRecord('people-search', 'new', { reload: true });
+    return this.store.findRecord(this.searchModel, 'new', { reload: true });
   },
 
   reloadSearchFromQueryParams(searchParams) {
     let randomId = new Date().getTime();
-    this.store.push({ data: { id: randomId, type: 'people-search' } });
-    let search = this.store.peekRecord('people-search', randomId);
+    this.store.push({ data: { id: randomId, type: this.searchModel } });
+    let search = this.store.peekRecord(this.searchModel, randomId);
     search = search.fromQueryParams(searchParams);
     return search;
   },

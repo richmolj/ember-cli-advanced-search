@@ -16,11 +16,13 @@ let isChecked = customHelper(function(selector) {
 });
 
 export default PageObject.create({
-  visit:     visitable('/'),
-  nameValue: value('#search_name'),
-  name:      fillable('#search_name'),
-  submit:    clickable('#search_submit'),
-  reset:     clickable('#reset'),
+  visit:       visitable('/'),
+  nameValue:   value('#search_name'),
+  name:        fillable('#search_name'),
+  description: fillable('#search_description'),
+  descriptionValue: value('#search_description'),
+  submit:      clickable('#search_submit'),
+  reset:       clickable('#reset'),
 
   perPage:       text('#per_page'),
   totalPages:    text('#total_pages'),

@@ -71,6 +71,27 @@ test('basic text query', function(assert) {
   });
 });
 
+// Ensures pushPayload resets record
+test('removing a condition via back button', function(assert) {
+  page.visit().name('Bart').submit();
+
+  andThen(function() {
+    page.description('Son').submit();
+
+    andThen(function() {
+      assert.equal(page.descriptionValue(), 'Son');
+      window.history.back();
+
+      let done = assert.async();
+      let checkBack = function() {
+        assert.equal(page.descriptionValue(), '');
+        done();
+      };
+      setTimeout(checkBack, 50);
+    });
+  });
+});
+
 test('loading from a url with an encoded search param', function(assert) {
   let encoded = btoa(JSON.stringify(searchObj()));
   page.visit({}, { search: encoded });
