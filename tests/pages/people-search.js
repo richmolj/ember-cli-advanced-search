@@ -30,7 +30,7 @@ export default PageObject.create({
 
   sortName: clickable('th:nth-child(2) a'),
   nameHasSortAscClass:  hasClass('asc', 'th:nth-child(2) a'),
-  nameHasSortDescClass: hasClass('asc', 'th:nth-child(2) a'),
+  nameHasSortDescClass: hasClass('desc', 'th:nth-child(2) a'),
 
   results: collection({
     itemScope: '.results .result',
@@ -52,9 +52,9 @@ export default PageObject.create({
         itemScope: '.buckets .bucket',
 
         item: {
-          click: clickable('input[type="checkbox"]'),
-          label: text('.bucket-label'),
-          count: text('.facet-count'),
+          click:     clickable('input[type="checkbox"]'),
+          label:     text('.bucket-label'),
+          count:     text('.facet-count'),
           isChecked: isChecked('input[type="checkbox"]')
         }
       })

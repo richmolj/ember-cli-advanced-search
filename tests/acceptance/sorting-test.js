@@ -42,6 +42,7 @@ test('toggling a sort header', function(assert) {
     page.sortName();
     andThen(function() {
       assertSort([{ att: 'name', dir: 'desc' }]);
+      assert.ok(page.nameHasSortDescClass(), 'has sort class "desc"');
     });
   });
 });

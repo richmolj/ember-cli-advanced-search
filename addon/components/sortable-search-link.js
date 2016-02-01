@@ -33,14 +33,18 @@ const SortableSearchLinkComponent = Ember.Component.extend({
     return direction === 'asc' ? 'desc' : 'asc';
   },
 
+  _setTempProperty(prop, val, interval) {
+    this.set(prop, val);
+    let _this = this;
+    let timeoutClicked = function() {
+      _this.set(prop, false);
+    };
+    Ember.run.later(timeoutClicked, interval);
+  },
+
   actions: {
     sort() {
-      this.set('justClicked', true);
-      let _this = this;
-      let timeoutClicked = function() {
-        _this.set('justClicked', false);
-      };
-      Ember.run.later(timeoutClicked, 100);
+      this._setTempProperty('justClicked', true, 100);
       this.get('onSort')(this.get('sortAttribute'), this.flipSort());
     }
   }
