@@ -12,6 +12,12 @@ const SortableSearchLinkComponent = Ember.Component.extend({
     return this.get('sortAttribute').capitalize();
   }),
 
+  isActive: Ember.computed('model.metadata.sort.@each.att', function() {
+    return this.get('model.metadata.sort').any((s) => {
+      return s.get('att') === this.get('sortAttribute');
+    });
+  }),
+
   currentDirection: Ember.computed('model.metadata.sort.[]', function() {
     let sorts = this.get('model.metadata.sort');
 

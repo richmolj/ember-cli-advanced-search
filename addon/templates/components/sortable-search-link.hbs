@@ -1,6 +1,6 @@
-<a href='' {{action 'sort'}} class="{{currentDirection}} {{if justClicked onSortClass}}">
+<a href='' {{action 'sort'}} class="{{currentDirection}} {{if justClicked onSortClass}} {{if isActive 'sort-active'}}">
   {{label}}
-  <span class="carets {{modelSortDirection}}">
+  <span class="carets">
     <span class='caret down'>&darr;</span>
     <span class='caret up'>&uarr;</span>
   </span>

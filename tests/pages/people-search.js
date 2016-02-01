@@ -23,6 +23,7 @@ export default PageObject.create({
   descriptionValue: value('#search_description'),
   submit:      clickable('#search_submit'),
   reset:       clickable('#reset'),
+  isLoading:   hasClass('loading', '.loading-area'),
 
   perPage:       text('#per_page'),
   totalPages:    text('#total_pages'),
