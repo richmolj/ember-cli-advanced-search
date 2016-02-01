@@ -1,0 +1,11 @@
+thead .asc .caret.down {
+  visibility: hidden;
+}
+
+thead .desc .caret.up {
+  visibility: hidden;
+}
+
+.loading {
+  opacity: 0.3;
+}

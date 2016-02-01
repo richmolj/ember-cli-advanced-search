@@ -20,42 +20,46 @@
   </div>
 
   <div class="mdl-cell mdl-cell--6-col">
-    <h5>Results</h5>
+    <div class="{{if model.isSaving 'loading'}}">
+      <h5>Results</h5>
 
-    total pages:
-    <span id='total_pages'>{{model.totalPages}}</span>
+      total pages:
+      <span id='total_pages'>{{model.totalPages}}</span>
 
-    total results:
-    <span id='total_results'>{{model.totalResultCount}}</span>
+      total results:
+      <span id='total_results'>{{model.totalResultCount}}</span>
 
-    current page:
-    <span id='current_page'>{{model.pagination.currentPage}}</span>
+      current page:
+      <span id='current_page'>{{model.pagination.currentPage}}</span>
 
-    per page:
-    <span id='per_page'>{{model.pagination.perPage}}</span>
+      per page:
+      <span id='per_page'>{{model.pagination.perPage}}</span>
 
-    pagination link:
-    <a id='page_two' href='' {{action 'paginate' 2}}>Page 2</a>
+      <div>
+        <a id='page_two' href='' {{action 'paginate' 2}}>Page 2</a>
+      </div>
 
-    <table class='results'>
-      <thead>
-        <tr>
-          {{#sortable-search-links model (action 'sort') as |links|}}
-            <th>id</th>
-            <th>{{links.link 'name' label='Name' onSortClass='bounce'}}</th>
-          {{/sortable-search-links}}
-        </tr>
-      </thead>
-
-      <tbody>
-        {{#each model.results as |result|}}
-          <tr class='result'>
-            <td>{{result.id}}</td>
-            <td class='name'>{{result.name}}</td>
+      <table class='results'>
+        <thead>
+          <tr>
+            {{#sortable-search-links model (action 'sort') as |links|}}
+              <th>id</th>
+              <th>{{links.link 'name' label='Name' onSortClass='bounce'}}</th>
+            {{/sortable-search-links}}
           </tr>
-        {{/each}}
-      </tbody>
-    </table>
+        </thead>
+
+        <tbody>
+          {{#each model.results as |result|}}
+            <tr class='result'>
+              <td>{{result.id}}</td>
+              <td class='name'>{{result.name}}</td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+
+    </div>
   </div>
 </div>
 

@@ -23,11 +23,11 @@ test('viewing basic aggregation data', function(assert) {
     assert.equal(nameSection.header(), 'Name', 'should have correct section label');
     assert.equal(nameSection.buckets().count(), 2, 'should have correct bucket count');
     assert.equal(nameSection.buckets(1).label(), 'Marge', 'should have correct first bucket label');
-    assert.equal(nameSection.buckets(1).count(), 7, 'should have correct first bucket count');
+    assert.equal(nameSection.buckets(1).count(), '(7)', 'should have correct first bucket count');
     assert.equal(nameSection.buckets(1).isChecked(), false, 'should not have first bucket checked');
 
     assert.equal(nameSection.buckets(2).label(), 'Bart', 'should have correct second bucket lable');
-    assert.equal(nameSection.buckets(2).count(), 2, 'should have correct second bucket count');
+    assert.equal(nameSection.buckets(2).count(), '(2)', 'should have correct second bucket count');
     assert.equal(nameSection.buckets(2).isChecked(), false, 'should not have second bucket checked');
   });
 });

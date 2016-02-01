@@ -15,7 +15,7 @@
 
   <div class='buckets'>
     {{#each facet.buckets as |bucket|}}
-      <span class='bucket'>
+      <div class='bucket'>
         <span {{action 'facetDidChange' facet bucket}}>
           {{#if bucket.selected}}
             {{input id=bucket.key type='checkbox' checked=true}}
@@ -26,9 +26,9 @@
 
         <label for="{{bucket.key}}">
           <span class='bucket-label'>{{bucket.key}}</span>
-          <span class="facet-count">{{bucket.count}}</span>
+          <span class="facet-count">({{bucket.count}})</span>
         </label>
-      </span>
+      </div>
     {{/each}}
   </div>
 </div>
