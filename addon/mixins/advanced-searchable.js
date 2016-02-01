@@ -22,7 +22,11 @@ export default Ember.Mixin.create({
     },
 
     reset() {
-      this.set('search', null);
+      if (this.get('search')) {
+        this.set('search', null);
+      } else {
+        this.get('model').save();
+      }
     }
   }
 });

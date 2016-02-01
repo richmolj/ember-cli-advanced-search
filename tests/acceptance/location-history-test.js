@@ -116,6 +116,19 @@ test('resetting a search that has been loaded from URL state', function(assert) 
   });
 });
 
+test('resetting a search that is not dirty', function(assert) {
+  page.visit();
+
+  andThen(function() {
+    assert.equal(server.queries, 1);
+    page.reset();
+
+    andThen(function() {
+      assert.equal(server.queries, 2, 'should still query the server');
+    });
+  });
+});
+
 test('resetting a search that has been modified by the user', function(assert) {
   page.visit().name('Bart').submit();
 

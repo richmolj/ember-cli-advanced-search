@@ -155,6 +155,12 @@ export default function() {
   });
 
   this.patch('/people-searches/:id', function(schema, request) {
+    if (getServer().queries) {
+      getServer().queries = getServer().queries + 1;
+    } else {
+      getServer().queries = 1;
+    }
+
     let payload = JSON.parse(request.requestBody).data.attributes;
     console.log('QUERY PAYLOAD:', payload);
 
