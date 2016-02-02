@@ -2,6 +2,7 @@
   "name": "bb-advanced-search",
   "version": "0.0.0",
   "description": "The default blueprint for ember-cli addons.",
+  "private": true,
   "directories": {
     "doc": "doc",
     "test": "tests"
