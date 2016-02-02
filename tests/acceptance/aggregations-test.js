@@ -35,6 +35,14 @@ test('viewing basic aggregation data', function(assert) {
   });
 });
 
+test('only aggregations specified by the route should appear', function(assert) {
+  visit('/people-search-no-aggs');
+
+  andThen(function() {
+    assert.equal(page.facetSections().count(), 0);
+  });
+});
+
 test('clicking a facet', function(assert) {
   page.visit().facetSections(1).buckets(2).click();
 

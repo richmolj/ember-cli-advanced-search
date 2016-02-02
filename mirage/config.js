@@ -59,6 +59,11 @@ const applyAggs = function(payload, search) {
     }
   ]
 
+  allAggregations = allAggregations.filter((a) => {
+    let requestedAggNames = Ember.A(payload.aggregations).mapBy('name');
+    return Ember.A(requestedAggNames).contains(a.name);
+  });
+
   search.aggregations = allAggregations;
   if (payload.aggregations.length > 0) {
     let newFilteredAggs = []
@@ -144,10 +149,17 @@ export default function() {
       conditions = { name: 'Marge' }
     }
 
+    let requestedAggs = [];
+    if (request.queryParams.aggregations) {
+      requestedAggs = request.queryParams.aggregations.map((name) => {
+        return { name: name, buckets: [] };
+      });
+    }
+
     let search = schema.create('peopleSearch', {
       id: new Date().getTime(),
       conditions: conditions,
-      aggregations: [],
+      aggregations: requestedAggs,
       metadata: {pagination: {current_page: 1, total: totalResults, per_page: perPage()}}
     });
 

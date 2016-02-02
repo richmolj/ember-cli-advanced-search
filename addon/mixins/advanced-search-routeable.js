@@ -2,6 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Mixin.create({
   searchModel: '', // ember data model name
+  aggregateOn: [],
 
   reloadBlankSearch() {
     // for whatever reason peekRecord and reload: true not working
@@ -13,7 +14,14 @@ export default Ember.Mixin.create({
   },
 
   fetchBlankSearch() {
-    let promise = this.store.findRecord(this.searchModel, 'new', { reload: true });
+    let promise = this.store.findRecord(this.searchModel, 'new', {
+      adapterOptions: {
+        params: {
+          aggregations: this.aggregateOn
+        }
+      },
+      reload: true
+    });
     promise.then((s) => {
       this._applyDefaults(s);
     });
