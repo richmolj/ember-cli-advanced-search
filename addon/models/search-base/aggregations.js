@@ -8,6 +8,10 @@ export default MF.Fragment.extend({
   order:   DS.attr('number'),
   buckets: MF.fragmentArray('search-base/aggregations/bucket'),
 
+  allBucketLabel: Ember.computed('name', function() {
+    return `${this.get('name')}-all-bucket`;
+  }),
+
   hasSelection: Ember.computed('buckets.@each.selected', function() {
     return this.get('buckets').filterBy('selected').get('length') > 0;
   }),

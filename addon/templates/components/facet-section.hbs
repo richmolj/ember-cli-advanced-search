@@ -1,33 +1,26 @@
-<!-- if/elses here because checkbox helper not binding to checked properly -->
-
 <div class='facet'>
   <div class='facet-header'>{{facet.label}}</div>
 
-  <label>All</label>
-
-  <span {{action 'allBucketDidChange' facet}}>
-    {{#if facet.hasSelection}}
-      {{input class='all-bucket' type='checkbox' checked=false}}
-    {{else}}
-      {{input class='all-bucket' type='checkbox' checked=true}}
-    {{/if}}
-  </span>
-
   <div class='buckets'>
-    {{#each facet.buckets as |bucket|}}
-      <div class='bucket'>
-        <span {{action 'facetDidChange' facet bucket}}>
-          {{#if bucket.selected}}
-            {{input id=bucket.key type='checkbox' checked=true}}
-          {{else}}
-            {{input id=bucket.key type='checkbox' checked=false}}
-          {{/if}}
-        </span>
-
-        <label for="{{bucket.key}}">
-          <span class='bucket-label'>{{bucket.key}}</span>
-          <span class="facet-count">({{bucket.count}})</span>
+    <div class='bucket {{if facet.noSelection "selected"}}'>
+      <span {{action 'allBucketDidChange' facet}}>
+        {{input id=facet.allBucketLabel class='all-bucket' type='checkbox' checked=facet.noSelection}}
+        <label for="{{facet.allBucketLabel}}">
+          <span class='bucket-label'>All</span>
         </label>
+      </span>
+    </div>
+
+    {{#each facet.buckets as |bucket|}}
+      <div class='bucket {{if bucket.selected "selected"}}'>
+        <span {{action 'facetDidChange' facet bucket}}>
+          {{input id=bucket.key type='checkbox' checked=bucket.selected}}
+
+          <label for="{{bucket.key}}">
+            <span class='bucket-label'>{{bucket.key}}</span>
+            <span class="facet-count">({{bucket.count}})</span>
+          </label>
+        </span>
       </div>
     {{/each}}
   </div>

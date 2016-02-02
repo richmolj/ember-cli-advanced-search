@@ -1,9 +1,9 @@
 import Ember from 'ember';
-import layout from '../templates/components/facet-sections';
+import componentLayout from '../templates/components/facet-sections';
 
 const FacetSectionsComponent = Ember.Component.extend({
-  layout: layout,
-  tagName: '',
+  layout: componentLayout,
+  tagName: ''
 });
 
 FacetSectionsComponent.reopenClass({

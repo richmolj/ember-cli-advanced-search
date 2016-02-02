@@ -21,25 +21,28 @@ test('viewing basic aggregation data', function(assert) {
 
     let nameSection = page.facetSections(1);
     assert.equal(nameSection.header(), 'Name', 'should have correct section label');
-    assert.equal(nameSection.buckets().count(), 2, 'should have correct bucket count');
-    assert.equal(nameSection.buckets(1).label(), 'Marge', 'should have correct first bucket label');
-    assert.equal(nameSection.buckets(1).count(), '(7)', 'should have correct first bucket count');
-    assert.equal(nameSection.buckets(1).isChecked(), false, 'should not have first bucket checked');
+    assert.equal(nameSection.buckets().count(), 3, 'should have correct bucket count');
+    assert.equal(nameSection.buckets(1).label(), 'All', 'should have "all" bucket');
+    assert.ok(nameSection.buckets(1).isChecked(), 'should check "all" bucket');
 
-    assert.equal(nameSection.buckets(2).label(), 'Bart', 'should have correct second bucket lable');
-    assert.equal(nameSection.buckets(2).count(), '(2)', 'should have correct second bucket count');
-    assert.equal(nameSection.buckets(2).isChecked(), false, 'should not have second bucket checked');
+    assert.equal(nameSection.buckets(2).label(), 'Marge', 'should have correct first bucket label');
+    assert.equal(nameSection.buckets(2).count(), '(7)', 'should have correct first bucket count');
+    assert.notOk(nameSection.buckets(2).isChecked(), 'should not have first bucket checked');
+
+    assert.equal(nameSection.buckets(3).label(), 'Bart', 'should have correct second bucket lable');
+    assert.equal(nameSection.buckets(3).count(), '(2)', 'should have correct second bucket count');
+    assert.notOk(nameSection.buckets(3).isChecked(), 'should not have second bucket checked');
   });
 });
 
 test('clicking a facet', function(assert) {
-  page.visit().facetSections(1).buckets(1).click();
+  page.visit().facetSections(1).buckets(2).click();
 
   andThen(function() {
     assert.equal(page.totalResults(), 7, 'should have correct total results');
     assert.equal(page.results().count(), 7, 'should have correct table results');
-    assert.equal(page.facetSections(1).buckets().count(), 1, 'should have buckets reflect the resultset');
-    assert.equal(page.facetSections(1).buckets(1).isChecked(), true, 'should check the selected bucket');
+    assert.equal(page.facetSections(1).buckets().count(), 2, 'should have buckets reflect the resultset');
+    assert.equal(page.facetSections(1).buckets(2).isChecked(), true, 'should check the selected bucket');
 
     assertEncodedParams('search', {
       conditions: {},
@@ -66,16 +69,18 @@ test('clicking a facet', function(assert) {
 });
 
 test('clicking "all" when a facet is selected', function(assert) {
-  page.visit().facetSections(1).buckets(1).click();
+  page.visit().facetSections(1).buckets(2).click();
 
   andThen(function() {
     assert.equal(page.totalResults(), 7, 'should have correct total results');
-    assert.equal(page.facetSections(1).buckets(1).isChecked(), true, 'should check the selected bucket');
+    assert.equal(page.facetSections(1).buckets(1).isChecked(), false, 'should uncheck the "all" bucket');
+    assert.equal(page.facetSections(1).buckets(2).isChecked(), true, 'should check the selected bucket');
     page.facetSections(1).clickAll();
 
     andThen(function() {
       assert.equal(page.totalResults(), 9, 'should reset total results');
-      assert.equal(page.facetSections(1).buckets(1).isChecked(), false, 'should uncheck the selected bucket');
+      assert.equal(page.facetSections(1).buckets(1).isChecked(), true, 'should recheck the "all" bucket');
+      assert.equal(page.facetSections(1).buckets(2).isChecked(), false, 'should uncheck the selected bucket');
     });
   });
 });
