@@ -5,14 +5,19 @@ export default Ember.Mixin.create({
   search: null,
 
   actions: {
-    query() {
+    query(opts = { resetPagination: true }) {
       let model = this.get('model');
+
+      if (opts.resetPagination) {
+        model.set('currentPage', 1);
+      }
+
       this.set('search', model.toQueryParams());
     },
 
     paginate(page) {
       this.set('model.currentPage', page);
-      this.send('query');
+      this.send('query', { resetPagination: false });
     },
 
     sort(attribute, direction) {
