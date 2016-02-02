@@ -13,7 +13,11 @@ export default Ember.Mixin.create({
   },
 
   fetchBlankSearch() {
-    return this.store.findRecord(this.searchModel, 'new', { reload: true });
+    let promise = this.store.findRecord(this.searchModel, 'new', { reload: true });
+    promise.then((s) => {
+      this._applyDefaults(s);
+    });
+    return promise;
   },
 
   reloadSearchFromQueryParams(searchParams) {
@@ -40,9 +44,15 @@ export default Ember.Mixin.create({
   // before we have a final resolved model.
   query(searchParams) {
     let search = this.freshSearch(searchParams);
+
     return search.then((s) => {
       return s.save();
     });
+  },
+
+  // Override to provide client-side defaults
+  queryDefaults() {
+    return {};
   },
 
   resetModelViaQueryParams(searchParams) {
@@ -56,6 +66,13 @@ export default Ember.Mixin.create({
 
   shouldReactToQueryParams(changed, totalPresent, removed) {
     return !!this.get('controller') && (changed.search || removed.search);
+  },
+
+  _applyDefaults(search) {
+    let queryDefaults = this.queryDefaults();
+    Object.keys(queryDefaults).forEach((key) => {
+      search.set(key, queryDefaults[key]);
+    });
   },
 
   actions: {
