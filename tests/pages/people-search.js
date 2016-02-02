@@ -55,7 +55,7 @@ export default PageObject.create({
         itemScope: '.buckets .bucket',
 
         item: {
-          click:     clickable('input[type="checkbox"]'),
+          click:     clickable('label'),
           label:     text('.bucket-label'),
           count:     text('.facet-count'),
           isChecked: isChecked('input[type="checkbox"]')

@@ -39,7 +39,7 @@ test('clicking a facet', function(assert) {
   page.visit().facetSections(1).buckets(2).click();
 
   andThen(function() {
-    assert.equal(page.totalResults(), 7, 'should have correct total results');
+    assert.equal(page.totalResults(), 7, 'should haDMDMDvve correct total results');
     assert.equal(page.results().count(), 7, 'should have correct table results');
     assert.equal(page.facetSections(1).buckets().count(), 2, 'should have buckets reflect the resultset');
     assert.equal(page.facetSections(1).buckets(2).isChecked(), true, 'should check the selected bucket');
