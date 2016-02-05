@@ -50,7 +50,7 @@ const SortableSearchLinkComponent = Ember.Component.extend({
 
   actions: {
     sort() {
-      this._setTempProperty('justClicked', true, 100);
+      this._setTempProperty('justClicked', true, 300);
       this.get('onSort')(this.get('sortAttribute'), this.flipSort());
     }
   }
