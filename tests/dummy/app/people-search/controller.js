@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import AdvancedSearchable from 'bb-advanced-search/mixins/advanced-searchable';
+import queryAutocomplete from 'bb-advanced-search/utils/query-autocomplete';
 
 export default Ember.Controller.extend(AdvancedSearchable, {
 
@@ -7,16 +8,11 @@ export default Ember.Controller.extend(AdvancedSearchable, {
 
   actions: {
     queryNameAutocomplete(query, deferred) {
-      let promise = this.get('ajax').request('/autocompletes/name', {
-        data: {
-          filter: query.term,
-          per_page: 5
-        }
-      });
-
-      promise.then((response) => {
-        deferred.resolve(response.results);
-      });
+      queryAutocomplete(this.get('ajax'),
+        '/autocompletes/name',
+        query.term,
+        deferred
+      );
     }
   }
 });
