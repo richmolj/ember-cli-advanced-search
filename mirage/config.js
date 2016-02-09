@@ -87,6 +87,16 @@ const filterResultsViaConditions = function(payload, search) {
       return true;
     }
   });
+
+  if (payload.conditions.person_id) {
+    search.results = search.results.filter((r) => {
+      if (payload.conditions.person_id.values.length > 0) {
+        return Ember.A(Ember.A(payload.conditions.person_id.values).mapBy('key')).contains(r.id);
+      } else {
+        return true;
+      }
+    });
+  }
 }
 
 const filterResultsViaAggs = function(payload, search) {
@@ -148,6 +158,7 @@ export default function() {
     if (!getServer().omitDefaultConditions) {
       conditions = { name: 'Marge' }
     }
+    conditions.person_id = { values: [], and: false };
 
     let requestedAggs = [];
     if (request.queryParams.aggregations) {
@@ -190,5 +201,23 @@ export default function() {
     search.save();
 
     return search;
+  });
+
+  this.get('/autocompletes/name', function(schema, request) {
+    let people = schema.person.all();
+
+    if (request.queryParams.filter) {
+      people = people.filter((p) => {
+        return p.name.toLowerCase().startsWith(request.queryParams.filter.toLowerCase());
+      });
+    }
+
+    let autocompletes = people.map((p) => {
+      return { id: p.id, key: p.id, text: p.name };
+    });
+
+    return {
+      results: autocompletes
+    };
   });
 }

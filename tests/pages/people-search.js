@@ -24,6 +24,23 @@ export default PageObject.create({
   submit:      clickable('#search_submit'),
   reset:       clickable('#reset'),
   isLoading:   hasClass('loading', '.loading-area'),
+  openNameAutocomplete: clickable('#name_autocomplete .select2-input'),
+
+  autocompleteOptions: collection({
+    itemScope: '.select2-results li',
+
+    item: {
+      label: text('.select2-result-label')
+    }
+  }),
+
+  nameAutocompleteSelections: collection({
+    itemScope: '#name_autocomplete .select2-choices .select2-search-choice',
+
+    item: {
+      text: text('div')
+    }
+  }),
 
   perPage:       text('#per_page'),
   totalPages:    text('#total_pages'),

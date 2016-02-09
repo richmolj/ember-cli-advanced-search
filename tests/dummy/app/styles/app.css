@@ -9,3 +9,7 @@ thead .desc .caret.up {
 .loading {
   opacity: 0.3;
 }
+
+.select2-container {
+  width: 150px;
+}

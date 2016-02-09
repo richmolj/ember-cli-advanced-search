@@ -17,6 +17,7 @@
     "lodash": "~3.7.0",
     "Faker": "~3.0.0",
     "babel-polyfill": ">= 0",
-    "material-design-lite": "~1.0.6"
+    "material-design-lite": "~1.0.6",
+    "select2": "3.5.2"
   }
 }

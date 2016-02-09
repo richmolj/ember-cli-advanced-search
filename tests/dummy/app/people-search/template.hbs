@@ -4,9 +4,30 @@
   <div class="mdl-cell mdl-cell--4-col">
     <h5>Query:</h5>
     <form {{action 'query' on='submit'}}>
-      <label>String Search</label>
-      {{input id='search_name' type='text' value=model.conditions.name }}
-      {{input id='search_description' type='text' value=model.conditions.description }}
+      <div>
+        <label>String Search</label>
+        {{input id='search_name' type='text' value=model.conditions.name }}
+      </div>
+
+      <div id='name_autocomplete'>
+        <label>Autocomplete Search</label>
+        {{select-2
+          placeholder="name"
+          value=model.conditions.person_id.values
+          allowClear=true
+          multiple=true
+          optionLabelPath='text'
+          typeaheadSearchingText="Searching names..."
+          typeaheadNoMatchesText="No names found for '%@'"
+          typeaheadErrorText="Loading failed: %@"
+          minimumInputLength=0
+          query="queryNameAutocomplete"
+        }}
+      </div>
+
+      <div style='display: none;'>
+        {{input id='search_description' type='text' value=model.conditions.description}}
+      </div>
 
       <div>
         <a href='' id='reset' {{action 'reset'}}>Reset</a>
