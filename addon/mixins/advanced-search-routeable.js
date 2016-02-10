@@ -64,11 +64,9 @@ export default Ember.Mixin.create({
   },
 
   resetModelViaQueryParams(searchParams) {
-    this.set('controller.isSearching', true);
     let newModel = this.query(searchParams);
     newModel.then((search) => {
       this.set('controller.model', search);
-      this.set('controller.isSearching', false);
     });
   },
 

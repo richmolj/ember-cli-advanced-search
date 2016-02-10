@@ -4,6 +4,8 @@ export default Ember.Mixin.create({
   queryParams: ['search'],
   search: null,
 
+  isSearching: Ember.computed.reads('model.isSaving'),
+
   actions: {
     query(opts = { resetPagination: true }) {
       let model = this.get('model');
