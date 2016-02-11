@@ -53,8 +53,13 @@ export default Ember.Mixin.create({
   query(searchParams) {
     let search = this.freshSearch(searchParams);
 
+    this._maybeSetController('isSearching', true);
     return search.then((s) => {
-      return s.save();
+      let promise = s.save();
+      promise.then(() => {
+        this._maybeSetController('isSearching', false);
+      });
+      return promise;
     });
   },
 
@@ -81,7 +86,20 @@ export default Ember.Mixin.create({
     });
   },
 
+  _maybeSetController(key, value) {
+    if (this.get('controller')) {
+      this.set(`controller.${key}`, value);
+    }
+  },
+
   actions: {
+    refresh() {
+      this._maybeSetController('isSearching', true);
+      this.get('controller.model').save().then(() => {
+        this._maybeSetController('isSearching', false);
+      });
+    },
+
     queryParamsDidChange(changed, totalPresent, removed) {
       if (this.shouldReactToQueryParams(changed, totalPresent, removed)) {
         if (changed.search || removed.search) {

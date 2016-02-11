@@ -4,8 +4,6 @@ export default Ember.Mixin.create({
   queryParams: ['search'],
   search: null,
 
-  isSearching: Ember.computed.reads('model.isSaving'),
-
   actions: {
     query(opts = { resetPagination: true }) {
       let model = this.get('model');
@@ -32,7 +30,7 @@ export default Ember.Mixin.create({
       if (this.get('search')) {
         this.set('search', null);
       } else {
-        this.get('model').save();
+        this.send('refresh');
       }
     }
   }
