@@ -93,11 +93,15 @@ export default Ember.Mixin.create({
   },
 
   actions: {
-    refresh() {
-      this._maybeSetController('isSearching', true);
+    refresh(showLoading = true) {
+      this._maybeSetController('isSearching', showLoading);
       this.get('controller.model').save().then(() => {
         this._maybeSetController('isSearching', false);
       });
+    },
+
+    backgroundRefresh() {
+      this.send('refresh', false);
     },
 
     queryParamsDidChange(changed, totalPresent, removed) {
