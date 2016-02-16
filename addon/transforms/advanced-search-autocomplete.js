@@ -17,11 +17,17 @@ export default DS.Transform.extend({
   serialize(deserialized) {
     if (this._shouldSerialize(deserialized)) {
       let serializedValues = deserialized.values.map((v) => {
-        return {
+        let serializedValue = {
           id: v.id,
           key: v.key,
           text: v.text
-        };
+        }
+
+        if (v.user_query) {
+          serializedValue.user_query = v.user_query
+        }
+
+        return serializedValue
       });
       return {
         and: deserialized.and || false,
