@@ -92,6 +92,10 @@ export default Ember.Mixin.create({
     }
   },
 
+  _throttleRefresh() {
+    this.send('refresh', false);
+  },
+
   actions: {
     refresh(showLoading = true) {
       this._maybeSetController('isSearching', showLoading);
@@ -101,7 +105,7 @@ export default Ember.Mixin.create({
     },
 
     backgroundRefresh() {
-      this.send('refresh', false);
+      Ember.run.throttle(this, this._throttleRefresh, 1000);
     },
 
     queryParamsDidChange(changed, totalPresent, removed) {
