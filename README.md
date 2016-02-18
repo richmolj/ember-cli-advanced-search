@@ -2,7 +2,106 @@
 
 ## Installation
 
+`ember install bb-advanced-search`
+
 ## Running
+
+Define your route:
+
+```es6
+import Ember from 'ember';
+import AdvancedSearchRouteable from 'bb-advanced-search/mixins/advanced-search-routeable';
+
+export default Ember.Route.extend(AdvancedSearchRouteable, {
+  searchModel: 'people-search',
+  aggregateOn: ['name'],
+
+  model(params) {
+    return this.query(params.search);
+  }
+});
+```
+
+...And controller
+
+```es6
+import Ember from 'ember';
+import AdvancedSearchable from 'bb-advanced-search/mixins/advanced-searchable';
+
+export default Ember.Controller.extend(AdvancedSearchable)
+```
+
+...And model
+
+```es6
+import DS from 'ember-data';
+import SearchBase from './search-base';
+import MF from 'model-fragments';
+
+export default SearchBase.extend({
+  conditions: MF.fragment('people-search/conditions', { defaultValue: {} }),
+  results: DS.hasMany('person')
+});
+```
+
+...And that model's conditions
+
+```es6
+import DS from 'ember-data';
+import MF from 'model-fragments';
+
+export default MF.Fragment.extend({
+  name: DS.attr('string'),
+  description: DS.attr('string')
+});
+```
+
+Then bring everything together in a template:
+
+```hbs
+<form {{action 'query' on='submit'}}>
+  {{input type='text' value=model.conditions.name }}
+</form>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    {{#each model.results as |result|}}
+      <tr>
+        <td>{{result.name}}</td>
+        <td>{{result.description}}</td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
+```
+
+### Faceting
+
+Add `aggregateOn` to your route to specify the aggregations that should
+come back:
+
+```es6
+// code
+export default Ember.Route.extend(AdvancedSearchRouteable, {
+  searchModel: 'people-search',
+  aggregateOn: ['name']
+
+  // code
+});
+```
+
+Then add facet sections component to your template:
+
+```hbs
+{{facet-sections model.aggregations onFacetChange=(action 'query')}}
+```
 
 ## Enhance findRecord in application adapter
 
