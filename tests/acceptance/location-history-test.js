@@ -90,7 +90,6 @@ test('loading indicator', function(assert) {
       server.timing = 0;
     });
   });
-
 });
 
 // Ensures pushPayload resets record

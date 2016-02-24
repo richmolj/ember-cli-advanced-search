@@ -92,7 +92,7 @@ export default Ember.Mixin.create({
     }
   },
 
-  _throttleRefresh() {
+  _debounceRefresh() {
     this.send('refresh', false);
   },
 
@@ -105,7 +105,7 @@ export default Ember.Mixin.create({
     },
 
     backgroundRefresh() {
-      Ember.run.throttle(this, this._throttleRefresh, 1000);
+      Ember.run.debounce(this, this._debounceRefresh, 1000);
     },
 
     queryParamsDidChange(changed, totalPresent, removed) {

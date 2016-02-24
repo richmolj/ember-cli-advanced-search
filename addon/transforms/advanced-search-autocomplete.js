@@ -21,13 +21,13 @@ export default DS.Transform.extend({
           id: v.id,
           key: v.key,
           text: v.text
-        }
+        };
 
         if (v.user_query) {
-          serializedValue.user_query = v.user_query
+          serializedValue.user_query = v.user_query;
         }
 
-        return serializedValue
+        return serializedValue;
       });
       return {
         and: deserialized.and || false,

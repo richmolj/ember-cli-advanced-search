@@ -16,15 +16,16 @@ let isChecked = customHelper(function(selector) {
 });
 
 export default PageObject.create({
-  visit:       visitable('/'),
-  nameValue:   value('#search_name'),
-  name:        fillable('#search_name'),
-  description: fillable('#search_description'),
-  descriptionValue: value('#search_description'),
-  submit:      clickable('#search_submit'),
-  reset:       clickable('#reset'),
-  isLoading:   hasClass('loading', '.loading-area'),
-  openNameAutocomplete: clickable('#name_autocomplete .select2-input'),
+  visit:                    visitable('/'),
+  nameValue:                value('#search_name'),
+  name:                     fillable('#search_name'),
+  description:              fillable('#search_description'),
+  descriptionValue:         value('#search_description'),
+  submit:                   clickable('#search_submit'),
+  reset:                    clickable('#reset'),
+  triggerBackgroundRefresh: clickable('#bg_refresh'),
+  isLoading:                hasClass('loading', '.loading-area'),
+  openNameAutocomplete:     clickable('#name_autocomplete .select2-input'),
 
   autocompleteOptions: collection({
     itemScope: '.select2-results li',
@@ -48,7 +49,7 @@ export default PageObject.create({
   currentPage:   text('#current_page'),
   pageTwo:       clickable('#page_two'),
 
-  sortName: clickable('th:nth-child(2) a'),
+  sortName:             clickable('th:nth-child(2) a'),
   nameHasSortAscClass:  hasClass('asc', 'th:nth-child(2) a'),
   nameHasSortDescClass: hasClass('desc', 'th:nth-child(2) a'),
 

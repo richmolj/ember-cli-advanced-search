@@ -29,6 +29,12 @@
         {{input id='search_description' type='text' value=model.conditions.description}}
       </div>
 
+      <!-- typically you'd call this through a service, maybe due to a websocket -->
+      <!-- this is just for testing -->
+      <div style='visibility: hidden'>
+        <a href='' id='bg_refresh' {{action 'backgroundRefresh'}}>bg refresh</a>
+      </div>
+
       <div>
         <a href='' id='reset' {{action 'reset'}}>Reset</a>
       </div>
