@@ -1,1 +1,1 @@
-export { default } from 'bb-advanced-search/models/search-base';
+export { default } from 'ember-cli-advanced-search/models/search-base';

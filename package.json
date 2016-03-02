@@ -1,5 +1,5 @@
 {
-  "name": "bb-advanced-search",
+  "name": "ember-cli-advanced-search",
   "version": "0.5.2",
   "description": "The default blueprint for ember-cli addons.",
   "private": true,

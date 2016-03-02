@@ -18,7 +18,7 @@ test('triggering background refresh', function(assert) {
     server.timing = 100;
     page.triggerBackgroundRefresh();
 
-   let done = assert.async();
+    let done = assert.async();
     setTimeout(() => {
       assert.notOk(page.isLoading(), 'should not show loading indicator');
       done();

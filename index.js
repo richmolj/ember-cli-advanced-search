@@ -2,5 +2,5 @@
 'use strict';
 
 module.exports = {
-  name: 'bb-advanced-search'
+  name: 'ember-cli-advanced-search'
 };

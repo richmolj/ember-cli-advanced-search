@@ -1,8 +1,8 @@
-# Bb-advanced-search
+# ember-cli-advanced-search
 
 ## Installation
 
-`ember install bb-advanced-search`
+`ember install ember-cli-advanced-search`
 
 ## Running
 
@@ -10,7 +10,7 @@ Define your route:
 
 ```es6
 import Ember from 'ember';
-import AdvancedSearchRouteable from 'bb-advanced-search/mixins/advanced-search-routeable';
+import AdvancedSearchRouteable from 'ember-cli-advanced-search/mixins/advanced-search-routeable';
 
 export default Ember.Route.extend(AdvancedSearchRouteable, {
   searchModel: 'people-search',
@@ -26,7 +26,7 @@ export default Ember.Route.extend(AdvancedSearchRouteable, {
 
 ```es6
 import Ember from 'ember';
-import AdvancedSearchable from 'bb-advanced-search/mixins/advanced-searchable';
+import AdvancedSearchable from 'ember-cli-advanced-search/mixins/advanced-searchable';
 
 export default Ember.Controller.extend(AdvancedSearchable)
 ```
@@ -35,7 +35,7 @@ export default Ember.Controller.extend(AdvancedSearchable)
 
 ```es6
 import DS from 'ember-data';
-import SearchBase from './search-base';
+import SearchBase from 'ember-cli-advanced-search/models/search-base';
 import MF from 'model-fragments';
 
 export default SearchBase.extend({

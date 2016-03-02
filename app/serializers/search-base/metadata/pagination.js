@@ -1,1 +1,1 @@
-export { default } from 'bb-advanced-search/serializers/search-base/metadata/pagination';
+export { default } from 'ember-cli-advanced-search/serializers/search-base/metadata/pagination';

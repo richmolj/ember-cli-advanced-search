@@ -1,1 +1,1 @@
-export { default } from 'bb-advanced-search/components/facet-section';
+export { default } from 'ember-cli-advanced-search/components/facet-section';

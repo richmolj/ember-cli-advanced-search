@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import DS from 'ember-data';
 import MF from 'model-fragments';
-import SearchPaginatable from 'bb-advanced-search/mixins/search-paginatable';
+import SearchPaginatable from 'ember-cli-advanced-search/mixins/search-paginatable';
 
 export default DS.Model.extend(SearchPaginatable, {
   aggregations: MF.fragmentArray('search-base/aggregations', { defaultValue: [] }),

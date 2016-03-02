@@ -1,1 +1,1 @@
-export { default } from 'bb-advanced-search/transforms/advanced-search-autocomplete';
+export { default } from 'ember-cli-advanced-search/transforms/advanced-search-autocomplete';
