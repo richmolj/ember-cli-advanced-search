@@ -12,7 +12,7 @@ moduleForAcceptance('Acceptance | client-side defaults', {
 });
 
 test('initialize with defaults from the server', function(assert) {
-  visit('/people-search-client-side-defaults');
+  visit('/client-side-defaults');
 
   andThen(function() {
     assert.equal(page.results().count(), 1, 'should have correct result count based on client-side defaults');
@@ -21,7 +21,7 @@ test('initialize with defaults from the server', function(assert) {
 });
 
 test('resetting a search without losing client-side defaults', function(assert) {
-  visit('/people-search-client-side-defaults');
+  visit('/client-side-defaults');
 
   andThen(function() {
     page.name('Bart').submit();
