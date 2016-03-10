@@ -110,6 +110,20 @@ export default Ember.Mixin.create({
       });
     },
 
+    performSearch(model, opts = {}) {
+      let searchParams = model.toQueryParams();
+
+      if (opts.refresh) {
+        searchParams = null;
+      }
+
+      this.transitionTo(this.routeName, {
+        queryParams: {
+          search: searchParams
+        }
+      });
+    },
+
     backgroundRefresh() {
       Ember.run.debounce(this, this._debounceRefresh, 1000);
     },

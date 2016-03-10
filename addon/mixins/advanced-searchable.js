@@ -13,7 +13,7 @@ export default Ember.Mixin.create({
         model.set('currentPage', 1);
       }
 
-      this.set('search', model.toQueryParams());
+      this.send('performSearch', model);
     },
 
     paginate(page) {
