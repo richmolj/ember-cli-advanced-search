@@ -71,27 +71,6 @@ test('basic text query', function(assert) {
   });
 });
 
-test('loading indicator', function(assert) {
-  page.visit();
-
-  andThen(function() {
-    assert.notOk(page.isLoading());
-    server.timing = 100;
-    page.name('Bart').submit();
-
-    let done = assert.async();
-    setTimeout(() => {
-      assert.ok(page.isLoading());
-      done();
-    }, 80);
-
-    andThen(function() {
-      assert.notOk(page.isLoading());
-      server.timing = 0;
-    });
-  });
-});
-
 // Ensures pushPayload resets record
 test('removing a condition via back button', function(assert) {
   page.visit().name('Bart').submit();
