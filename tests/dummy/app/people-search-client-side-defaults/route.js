@@ -8,6 +8,13 @@ export default Ember.Route.extend(AdvancedSearchRouteable, {
     return this.query(params.search);
   },
 
+  renderTemplate(_controller, _model) {
+    this.render('people-search', {
+      model: _model,
+      controller: _controller
+    });
+  },
+
   queryDefaults() {
     return {
       conditions: {

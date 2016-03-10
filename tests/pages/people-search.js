@@ -17,6 +17,7 @@ let isChecked = customHelper(function(selector) {
 
 export default PageObject.create({
   visit:                    visitable('/'),
+  visitMultipleModels:      visitable('/multiple-models'),
   nameValue:                value('#search_name'),
   name:                     fillable('#search_name'),
   description:              fillable('#search_description'),

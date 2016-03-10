@@ -3,10 +3,11 @@ import Ember from 'ember';
 export default Ember.Mixin.create({
   queryParams: ['search'],
   search: null,
+  searchModelProperty: 'model',
 
   actions: {
     query(opts = { resetPagination: true }) {
-      let model = this.get('model');
+      let model = this.get(this.get('searchModelProperty'));
 
       if (opts.resetPagination) {
         model.set('currentPage', 1);
@@ -16,13 +17,13 @@ export default Ember.Mixin.create({
     },
 
     paginate(page) {
-      this.set('model.currentPage', page);
+      this.set(`${this.get('searchModelProperty')}.currentPage`, page);
       this.send('query', { resetPagination: false });
     },
 
     sort(attribute, direction) {
       let sort = { att: attribute, dir: direction };
-      this.set('model.metadata.sort', [sort]);
+      this.set(`${this.get('searchModelProperty')}.metadata.sort`, [sort]);
       this.send('query');
     },
 

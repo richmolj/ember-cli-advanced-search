@@ -8,6 +8,7 @@ Router.map(function() {
   this.route('people-search', { path: '/' });
   this.route('people-search-client-side-defaults');
   this.route('people-search-no-aggs');
+  this.route('multiple-models');
 });
 
 export default Router;

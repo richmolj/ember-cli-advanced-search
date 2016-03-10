@@ -71,7 +71,8 @@ export default Ember.Mixin.create({
   resetModelViaQueryParams(searchParams) {
     let newModel = this.query(searchParams);
     newModel.then((search) => {
-      this.set('controller.model', search);
+      let modelProperty = this.get('controller.searchModelProperty');
+      this.set(`controller.${modelProperty}`, search);
     });
   },
 
@@ -96,10 +97,15 @@ export default Ember.Mixin.create({
     this.send('refresh', false);
   },
 
+  _controllerSearchModel() {
+    let modelProperty = this.get('controller.searchModelProperty');
+    return this.get(`controller.${modelProperty}`);
+  },
+
   actions: {
     refresh(showLoading = true) {
       this._maybeSetController('isSearching', showLoading);
-      this.get('controller.model').save().then(() => {
+      this._controllerSearchModel().save().then(() => {
         this._maybeSetController('isSearching', false);
       });
     },

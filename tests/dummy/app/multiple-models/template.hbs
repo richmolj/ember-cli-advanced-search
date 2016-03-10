@@ -1,0 +1,42 @@
+<h3>People Search</h3>
+
+<div class="mdl-grid">
+  <div class="mdl-cell mdl-cell--4-col">
+    <h5>Query:</h5>
+    <form {{action 'query' on='submit'}}>
+      <div>
+        <label>String Search</label>
+        {{input id='search_name' type='text' value=model.search.conditions.name }}
+      </div>
+      <div>
+        <button id='search_submit' type='submit'>Submit</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="mdl-cell mdl-cell--6-col">
+    <div class="loading-area {{if isSearching 'loading'}}">
+      <h5>Results</h5>
+
+      <table class='results'>
+        <thead>
+          <tr>
+          </tr>
+        </thead>
+
+        <tbody>
+          {{#each model.search.results as |result|}}
+            <tr class='result'>
+              <td>{{result.id}}</td>
+              <td class='name'>{{result.name}}</td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>
+
+
+<br />
