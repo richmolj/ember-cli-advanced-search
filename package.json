@@ -1,6 +1,6 @@
 {
   "name": "ember-cli-advanced-search",
-  "version": "0.5.3",
+  "version": "0.5.4",
   "description": "Easy faceted search forms",
   "private": false,
   "directories": {
