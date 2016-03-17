@@ -24,7 +24,7 @@ const bucketBy = function(arr, attr) {
       let count = findBy(counts, 'key', obj[attr]);
       count.count++
     } else {
-      counts.push({ key: obj[attr], count: 1, selected: false });
+      counts.push({ key: obj[attr], label: obj[attr].toUpperCase(), count: 1, selected: false });
     }
   }
   return counts;
