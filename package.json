@@ -2,7 +2,7 @@
   "name": "ember-cli-advanced-search",
   "version": "0.5.3",
   "description": "The default blueprint for ember-cli addons.",
-  "private": true,
+  "private": false,
   "directories": {
     "doc": "doc",
     "test": "tests"
