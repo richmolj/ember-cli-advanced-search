@@ -213,11 +213,13 @@ export default function() {
     }
 
     let autocompletes = people.map((p) => {
-      return { id: p.id, key: p.id, text: p.name };
+      return {
+        id: p.id,
+        type: 'autocompletes',
+        attributes: { key: p.id, text: p.name }
+      }
     });
 
-    return {
-      results: autocompletes
-    };
+    return { data: autocompletes };
   });
 }

@@ -14,18 +14,27 @@ export default Ember.Service.extend({
 
     promise.catch(deferred.reject);
     promise.then((response) => {
-      let { results } = response;
-
-      if (options.callback) {
-        results = results.map((item) => {
-          return options.callback(item);
-        });
-      }
-
+      let results = response.data.map(this._grabAttributes);
+      results = this._postProcess(results, options.callback);
       deferred.resolve(results);
     });
 
     return promise;
-  }
+  },
 
+  _grabAttributes(item) {
+    let { attributes } = item;
+    attributes.id = item.id;
+    return attributes;
+  },
+
+  _postProcess(results, postProcessor) {
+    if (postProcessor) {
+      return results.map((item) => {
+        return postProcessor(item);
+      });
+    } else {
+      return results;
+    }
+  }
 });

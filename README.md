@@ -149,6 +149,49 @@ export default {
 };
 ```
 
+## Autocompletes
+
+Use the `autocomplete` service:
+
+```es6
+autocomplete: Ember.inject.service(),
+
+actions: {
+  queryPersonNameAutocomplete(query, deferred) {
+    return this.get('autocomplete')
+      .query('/api/autocomplete/people', query.term, deferred);
+  }
+}
+```
+
+This is now compatible with select2, e.g.
+
+```hbs
+{{select-2
+  value=searchModel.conditions.people_ids.values
+  allowClear=true
+  multiple=true
+  optionLabelPath='text'
+  query="queryPersonNameAutocomplete"
+}}
+```
+The expected server response is:
+
+```
+{
+  data: [
+    {
+      id: 1,
+      type: 'autocompletes',
+      attributes: {
+        key: 1,
+        text: 'Joe'
+      }
+    }
+  ]
+}
+```
+
 ## Running Tests
 
 * `npm test` (Runs `ember try:testall` to test your addon against multiple Ember versions)
