@@ -6,13 +6,17 @@ import SearchPaginatable from 'ember-cli-advanced-search/mixins/search-paginatab
 export default DS.Model.extend(SearchPaginatable, {
   aggregations: MF.fragmentArray('search-base/aggregations', { defaultValue: [] }),
   metadata: MF.fragment('search-base/metadata', { defaultValue: { pagination: {} } }),
-
   // TODO needs to be one base serializer so not sent to server as well
-  toQueryParams() {
+  serialized() {
     let serialized = this.serialize().data.attributes;
     serialized.id = this.get('id');
     serialized.conditions = this._serializeConditions(serialized.conditions);
-    let encoded =  btoa(JSON.stringify(serialized));
+    return serialized;
+  },
+
+  // TODO needs to be one base serializer so not sent to server as well
+  toQueryParams() {
+    let encoded =  btoa(JSON.stringify(this.serialized()));
     return encoded;
   },
 
