@@ -15,13 +15,12 @@ test('triggering background refresh', function(assert) {
   andThen(function() {
     assert.equal(page.results().count(), 1, 'show have correct initial results');
     server.create('person');
-    server.timing = 100;
     page.triggerBackgroundRefresh();
 
-    let done = assert.async();
+    let done1 = assert.async();
     setTimeout(() => {
       assert.notOk(page.isLoading(), 'should not show loading indicator');
-      done();
+      done1();
     }, 80);
 
     andThen(function() {

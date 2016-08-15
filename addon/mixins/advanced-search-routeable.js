@@ -50,10 +50,10 @@ export default Ember.Mixin.create({
 
   // We want to resolve both the template and the query
   // before we have a final resolved model.
-  query(searchParams) {
+  query(searchParams, showLoading = true) {
     let search = this.freshSearch(searchParams);
 
-    this._maybeSetController('isSearching', true);
+    this._maybeSetController('isSearching', showLoading);
     return search.then((s) => {
       let promise = s.save();
       promise.then(() => {
@@ -102,11 +102,16 @@ export default Ember.Mixin.create({
     return this.get(`controller.${modelProperty}`);
   },
 
+  _setResults(results) {
+    let modelProperty = this.get('controller.searchModelProperty');
+    return this.set(`controller.${modelProperty}.results`, results);
+  },
+
   actions: {
     refresh(showLoading = true) {
-      this._maybeSetController('isSearching', showLoading);
-      this._controllerSearchModel().save().then(() => {
-        this._maybeSetController('isSearching', false);
+      let promise = this.query(this._controllerSearchModel().toQueryParams(), showLoading);
+      promise.then((search) => {
+        this._setResults(search.get('results'));
       });
     },
 
@@ -123,5 +128,4 @@ export default Ember.Mixin.create({
       this._super(changed, totalPresent, removed);
     }
   }
-
 });
