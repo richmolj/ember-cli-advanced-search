@@ -8,7 +8,7 @@ export default DS.Model.extend(SearchPaginatable, {
   metadata: MF.fragment('search-base/metadata', { defaultValue: { pagination: {} } }),
   // TODO needs to be one base serializer so not sent to server as well
   serialized() {
-    let serialized = this.serialize().data.attributes;
+    let serialized = this.serialize().data.attributes || {};
     serialized.id = this.get('id');
     serialized.conditions = this._serializeConditions(serialized.conditions);
     return serialized;
