@@ -1,5 +1,8 @@
 # ember-cli-advanced-search
 
+Simplify advanced search forms. Works well with
+[trample](https://github.com/richmolj/trample) backend.
+
 ## Installation
 
 `ember install ember-cli-advanced-search`
