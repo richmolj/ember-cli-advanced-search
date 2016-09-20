@@ -20,9 +20,6 @@ matrix:
   allow_failures:
     - env: EMBER_TRY_SCENARIO=ember-canary
 
-cache:
-  directories:
-    - "travis_phantomjs"
 # Travis doesn't have great support for phantom 2 yet
 # https://github.com/travis-ci/travis-ci/issues/3225
 before_install:
