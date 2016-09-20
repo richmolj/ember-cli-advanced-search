@@ -1,3 +1,5 @@
+[![Build Status](https://api.travis-ci.org/richmolj/ember-cli-advanced-search.svg?branch=master)(https://travis-ci.org/richmolj/ember-cli-advanced-search)
+
 # ember-cli-advanced-search
 
 Simplify advanced search forms. Works well with
