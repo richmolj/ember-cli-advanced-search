@@ -8,7 +8,8 @@ export default Ember.Service.extend({
     let promise = this.get('ajax').request(endpoint, {
       data: {
         filter: filterParam,
-        per_page: options.per_page || 5
+        per_page: options.per_page || 5,
+        user_query: options.user_query
       }
     });
 
